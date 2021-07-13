@@ -16,7 +16,7 @@ function ProfileSidebar(propriedades) {
 export default function Home() {
 
   const githubUser = 'leandroaragao31';
-  const pessoasFavoritas = ['rhayssadandara', 'juunegreiros', 'marxxbluecode', 'luanpires94']
+  const pessoasFavoritas = ['rhayssadandara', 'juunegreiros', 'marxxbluecode', 'luanpires94', 'pamelaferreiralima', 'lailadrumond']
 
   return (
     <>
