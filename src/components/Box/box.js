@@ -44,11 +44,17 @@ const Box = styled.div`
     padding: 14px 16px;
     margin-bottom: 14px;
     border-radius: 10000px;
+    transition:1s;
     ::placeholder {
       color: #333333;
-      opacity: 1;
+      opacity: 0.4;
     }
   }
+  input:hover{
+    -webkit-box-shadow: inset -1px 3px 8px 5px #708090, 2px 5px 16px 0px #708090, 5px 5px 15px 5px rgba(0,0,0,0); 
+     box-shadow: inset -1px 3px 8px 5px #708090, 2px 5px 16px 0px #708090, 5px 5px 15px 5px rgba(0,0,0,0);
+  }
+
   button {
     border: 0;
     padding: 8px 12px;
@@ -56,7 +62,7 @@ const Box = styled.div`
     border-radius: 10000px;
     background-color: #6F92BB;
   }
-`; 
+`;
 
 
 export default Box;
