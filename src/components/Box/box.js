@@ -18,11 +18,7 @@ const Box = styled.div`
     font-weight: 400;
     margin-bottom: 20px;
   }
-  .subTitle {
-    font-size: 18px;
-    font-weight: 400;
-    margin-bottom: 20px;
-  }
+
   .smallTitle {
     margin-bottom: 20px;
     font-size: 16px;
@@ -61,6 +57,16 @@ const Box = styled.div`
     color: #FFFFFF;
     border-radius: 10000px;
     background-color: #6F92BB;
+    border:solid;
+  }
+
+  h2{
+    text-align:left;
+    font-size: 20px;
+    font-weight: 400;
+    margin-bottom: 20px;
+    opacity: 1;
+    font-family:san-serif;
   }
 `;
 
