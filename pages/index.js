@@ -45,7 +45,7 @@ export default function Home(){
         <div className="welcomeArea" style={{ gridArea: 'welcomeArea' }}>
           <Box>
             <h1 className="title">
-              Bem vindo(a)
+              Bem vindo(a), {githubUser}
             </h1>
 
             <OrkutNostalgicIconSet />
@@ -60,7 +60,7 @@ export default function Home(){
               console.log('Campo:', dadosDoForm.get("image"))
 
               const comunidade ={
-                id: new date().toISOString(),
+                id: new Date().toISOString(),
                 title: dadosDoForm.get("title"),
                 image: dadosDoForm.get("image")
               }
