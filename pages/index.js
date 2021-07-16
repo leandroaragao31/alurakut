@@ -3,7 +3,7 @@ import MainGrid from "../src/components/MainGrid/index"
 import Box from "../src/components/Box/box"
 import { AlurakutMenu, AlurakutProfileSidebarMenuDefault, OrkutNostalgicIconSet } from "../src/lib/AlurakutCommons"
 import { ProfileRelationsBoxWrapper } from "../src/components/ProfileRelation/index"
-import {ProfileRelationsBox} from "../src/components/Depoimentos.js/ProfileRelationsBox"
+import { ProfileRelationsBox } from "../src/components/Depoimentos.js/ProfileRelationsBox"
 function ProfileSidebar(propriedades) {
   return (
     <Box as='aside'>
@@ -22,11 +22,11 @@ function ProfileSidebar(propriedades) {
   )
 }
 
-function ProfileFollowersBox(props){
-  return(
+function ProfileFollowersBox(props) {
+  return (
     <ProfileRelationsBoxWrapper>
-    <h2 className="subTitle"> {props.title} ({props.item.length})</h2>
-  { /* <ul>
+      <h2 className="subTitle"> {props.title} ({props.item.length})</h2>
+      { /* <ul>
       {seguidores.map((item) => {
         return (
           <li key={item}>
@@ -39,43 +39,66 @@ function ProfileFollowersBox(props){
       })}
     </ul>
     */}
-  </ProfileRelationsBoxWrapper>
+    </ProfileRelationsBoxWrapper>
   )
 }
 
 
 export default function Home() {
- 
+
   const [depoimentos, setDepoimentos] = React.useState([
     {
-    id: '123123123',
-    title: 'Leandro Aragão é uma pessoa muito Legal <3', 
-    
-  }
+      id: '123123123',
+      title: 'Leandro Aragão é uma pessoa muito Legal <3',
+
+    }
   ]);
   console.log(depoimentos);
 
-  const [comunidades, setComunidades] = React.useState([
-    {
-      id: '1231231321',
-      title: 'Anão Vestido de Palhaço mata 7',
-      image: 'https://www.socialdub.com/groupspictures/5934/59341256110230520887.jpg?x2'
-    }
-  ]);
+  const [comunidades, setComunidades] = React.useState([]);
   console.log(comunidades);
   const githubUser = 'leandroaragao31';
   const pessoasFavoritas = ['rhayssadandara', 'juunegreiros', 'marxxbluecode', 'luanpires94', 'pamelaferreiralima', 'lailadrumond']
 
   const [seguidores, setSeguidores] = React.useState([]);
-  React.useEffect(function() {
-   fetch('https://api.github.com/users/leandroaragao31/followers')
-  .then(function(respostaDoServidor){
-    return respostaDoServidor.json()
-  })
-  .then(function(respostaCompleta){
-    setSeguidores(respostaCompleta)
-  })
-  } ,[])
+  React.useEffect(function () {
+    fetch('https://api.github.com/users/leandroaragao31/followers')
+      .then(function (respostaDoServidor) {
+        return respostaDoServidor.json()
+      })
+      .then(function (respostaCompleta) {
+        setSeguidores(respostaCompleta)
+      })
+
+
+    //API GraphQL
+
+    fetch('https://graphql.datocms.com/', {
+      method: 'POST',
+      headers: {
+        'Authorization': 'b1e21f1667bba6a8490d07d89dcd46',
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+
+      body: JSON.stringify({
+        "query": `
+      query{
+      allComunnities {
+        title
+        id
+        imageUrl
+        creatorSlug
+      }
+    }` }) })
+    .then((response) => response.json())
+    .then((respostaCompleta) =>{
+      const comunidadesVindasdoDato = respostaCompleta.data.allComunnities;
+
+      setComunidades(comunidadesVindasdoDato)
+      console.log(respostaCompleta)
+    })
+  }, [])
 
   return (
     <>
@@ -119,7 +142,7 @@ export default function Home() {
                   name="title"
                   aria-label="Qual vai ser o nome da sua comunidade?"
                   type="text "
-                  
+
                 />
               </div>
               <div>
@@ -135,7 +158,7 @@ export default function Home() {
             </form>
           </Box>
           <Box>
-            <h2>Depoimentos</h2>
+            <h2>Scraps</h2>
             <form onSubmit={function handleSubimitDepoimentos(e) {
               e.preventDefault();
               const deposDoForm = new FormData(e.target);
@@ -152,17 +175,17 @@ export default function Home() {
               <input placeholder="Escreva aqui seu depoimento" type="text" name="text" />
               <button>Submit</button>
             </form>
-            
+
           </Box>
-            
+
           <ProfileRelationsBox>
             <h2 className="subTitle"> Depoimentos ({depoimentos.length})</h2>
             <ul>
               {depoimentos.map((item) => {
                 return (
                   <li key={item.id}>
-                    {item.text} 
-                      <span>{item.title}</span>
+                    {item.text}
+                    <span>{item.title}</span>
                   </li>
                 )
               })}
@@ -177,8 +200,8 @@ export default function Home() {
               {comunidades.map((item) => {
                 return (
                   <li key={item.id}>
-                    <a href={`/users/${item.title}`}>
-                      <img src={item.image} alt="imagem" />
+                    <a href={`/Comunidades/${item.id}`}>
+                      <img src={item.imageUrl} alt="imagem" />
                       <span>{item.title}</span>
                     </a>
                   </li>
@@ -187,7 +210,7 @@ export default function Home() {
             </ul>
 
           </ProfileRelationsBoxWrapper>
-          <ProfileFollowersBox title="Seguidores" item={seguidores}/>
+          <ProfileFollowersBox title="Seguidores" item={seguidores} />
           <ProfileRelationsBoxWrapper>
 
             <h2 className="smallTitle">
