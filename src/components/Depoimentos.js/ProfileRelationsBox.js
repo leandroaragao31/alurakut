@@ -1,33 +1,37 @@
+import React from 'react';
 import styled from 'styled-components';
 import Box from '../Box/box';
 
-export const ProfileRelationsBoxWrapper = styled(Box)`
+export const ProfileRelationsBox = styled(Box)`
   ul {
-    display: grid;
-    grid-gap: 8px;
-    grid-template-columns: 1fr 1fr 1fr; 
-    max-height: 220px;
+    display: flex;
+    flex-direction:column;
+    align-items:center
+    height:50vh;
+    max-height: 400px;
     list-style: none;
   }
-  img {
-    object-fit: cover;
-    background-position: center center;
-    width: 100%;
-    height: 100%;
-    position: relative;
+  li{
+    display:flex;
+    flex-wrap:no-wrap;
+    margin-bottom:2vh;
+    border-bottom: 2px #BEBEBE solid;
+    padding-bottom:2vh;
+    
   }
   ul li a {
-    display: inline-block;
+    display: flex;
+    flex-direction:column;
+    align-items:center
+    
     height: 102px;
-    position: relative;
-    overflow: hidden;
-    border-radius: 8px;
     span {
       color: #FFE4B5;
       font-size: 10px;
       position: absolute;
       left: 0;
-      bottom: 10px;
+      margin-top:10vh;
+      bottom: 10;
       z-index: 2;
       padding: 0 4px;
       overflow: hidden;
