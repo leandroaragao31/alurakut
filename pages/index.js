@@ -49,7 +49,7 @@ export default function Home() {
   const [depoimentos, setDepoimentos] = React.useState([
     {
     id: '123123123',
-    title: 'Leandro de Aragão é um amigo muito querido, o mais pica, cheirador de prexengas!  ', 
+    title: 'Leandro Aragão é uma pessoa muito Legal <3', 
     
   }
   ]);
